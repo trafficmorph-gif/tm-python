@@ -1,0 +1,65 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "trafficmorph"
+version = "0.1.0"
+description = "TrafficMorph Python SDK — typed client for the /api/v1 surface."
+readme = "README.md"
+# Python 3.10+ for PEP 604 union syntax (str | None), TypedDict
+# improvements, and httpx 0.25+'s typing requirements. The
+# generated client uses 3.10+ syntax verbatim so older interpreters
+# fail at import time, not at runtime.
+requires-python = ">=3.10"
+authors = [{ name = "TrafficMorph" }]
+license = { text = "Proprietary" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Typing :: Typed",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+]
+keywords = ["trafficmorph", "load-testing", "regression-testing", "ci"]
+# Runtime deps pinned to floors known to satisfy the generator's
+# emitted code. attrs and httpx are the two transitive deps the
+# generator hard-codes; python-dateutil handles the date/datetime
+# fields in our spec (Instant timestamps).
+dependencies = [
+    "attrs >= 22.2.0",
+    "httpx >= 0.25, < 1.0",
+    "python-dateutil >= 2.8.0",
+]
+
+[project.urls]
+Homepage = "https://trafficmorph.example.com"
+Documentation = "https://github.com/trafficmorph/tm-python"
+Repository = "https://github.com/trafficmorph/tm-python"
+
+[project.optional-dependencies]
+# `pip install trafficmorph[dev]` for contributors.
+dev = [
+    "pytest >= 7",
+    "pytest-asyncio >= 0.23",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["trafficmorph"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "trafficmorph",
+    "README.md",
+    "pyproject.toml",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# Generated client emits a __init__.py marker so pytest discovers
+# its imports cleanly; bake the import-mode here so contributors
+# don't need to remember it on the cli.
+addopts = "-q"

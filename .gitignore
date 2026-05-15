@@ -1,0 +1,15 @@
+# Python venvs (created by `make install` / `make regen-client`).
+.venv/
+.venv-tools/
+
+# Build artifacts.
+dist/
+build/
+*.egg-info/
+
+# Bytecode + caches.
+__pycache__/
+*.pyc
+.pytest_cache/
+
+.DS_Store

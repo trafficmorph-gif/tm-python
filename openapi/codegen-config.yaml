@@ -1,0 +1,32 @@
+# openapi-python-client configuration for generating the typed
+# v1 API client directly into trafficmorph/ (the generator owns
+# the package root outright — see the README's "Layout — what
+# regen touches vs. what it doesn't" table for why a _gen/ sub-
+# package isn't viable: the generator emits relative imports
+# (`from ...client import …`) that break when the code is moved
+# below the package root).
+#
+# The single source of truth for the spec lives at
+# ../cli/openapi/v1.json — same snapshot the CLI and the Go SDK
+# build from. Server-side schema changes flow into all three
+# generated clients via one OpenApiSpecSnapshotTest refresh.
+#
+# Regen sequence (run from sdk-python/):
+#   make regen-client    boots tool venv if needed, runs codegen
+#
+# After codegen, the Makefile post-step appends `from .sdk import
+# Client, …` to the generator-written __init__.py so the public
+# wrapper at trafficmorph/sdk.py stays exposed across regens.
+#
+# --meta=none is set in the Makefile invocation so most of this
+# config's metadata fields (project_name_override, package_name_override,
+# package_version_override) don't take effect: the generator skips
+# emitting pyproject.toml / README / .gitignore scaffolding. We
+# keep this file lean — only the generation-time options that
+# actually affect the emitted Python.
+
+# Treat overlong / colliding model names by prefixing them with
+# the spec's operation path. Without this, two operations whose
+# request bodies happen to share a schema title would collide on
+# a single model class name.
+use_path_prefixes_for_title_model_names: true
