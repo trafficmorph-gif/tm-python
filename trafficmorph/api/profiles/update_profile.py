@@ -66,9 +66,19 @@ def sync_detailed(
 ) -> Response[Any]:
     """ Update an existing profile
 
-     Ownership-checks the profile by id, then applies the upsert-by-name service path with the request
-    body's `name`. The schedule block, if present, replaces any existing schedule for the profile;
-    omitting it leaves the current schedule untouched.
+     Ownership-checks the profile by path id, then updates that specific row in place. The body's `name`
+    is the new value to store, not a lookup key â even if it matches a different profile's name, only
+    the path-id row is mutated. (The save service has both an id-based and a name-based code path; the
+    controller pins the path id on the save request so the id-based branch runs.)
+
+    Name uniqueness is NOT enforced server-side: PUT will happily produce a duplicate-named pair under
+    the same user. Subsequent name-keyed operations (POST `/profiles` upsert) would then resolve to the
+    most-recently-created duplicate, which is rarely what the caller wanted. Clients that care about
+    uniqueness (e.g. the MCP server's `tm_update_profile`) should pre-flight a `GET /profiles` and
+    reject renames that would collide.
+
+    The schedule block, if present, replaces any existing schedule for the profile; omitting it leaves
+    the current schedule untouched.
 
     Args:
         id (int):
@@ -108,9 +118,19 @@ async def asyncio_detailed(
 ) -> Response[Any]:
     """ Update an existing profile
 
-     Ownership-checks the profile by id, then applies the upsert-by-name service path with the request
-    body's `name`. The schedule block, if present, replaces any existing schedule for the profile;
-    omitting it leaves the current schedule untouched.
+     Ownership-checks the profile by path id, then updates that specific row in place. The body's `name`
+    is the new value to store, not a lookup key â even if it matches a different profile's name, only
+    the path-id row is mutated. (The save service has both an id-based and a name-based code path; the
+    controller pins the path id on the save request so the id-based branch runs.)
+
+    Name uniqueness is NOT enforced server-side: PUT will happily produce a duplicate-named pair under
+    the same user. Subsequent name-keyed operations (POST `/profiles` upsert) would then resolve to the
+    most-recently-created duplicate, which is rarely what the caller wanted. Clients that care about
+    uniqueness (e.g. the MCP server's `tm_update_profile`) should pre-flight a `GET /profiles` and
+    reject renames that would collide.
+
+    The schedule block, if present, replaces any existing schedule for the profile; omitting it leaves
+    the current schedule untouched.
 
     Args:
         id (int):

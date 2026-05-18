@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "trafficmorph"
-version = "0.1.0"
+version = "0.2.1"
 description = "TrafficMorph Python SDK — typed client for the /api/v1 surface."
 readme = "README.md"
 # Python 3.10+ for PEP 604 union syntax (str | None), TypedDict
