@@ -30,7 +30,7 @@ expose both sync and async call styles.
 pip install trafficmorph
 
 # Reproducible builds (CI / production) — pin to an exact version.
-pip install 'trafficmorph==0.3.2'
+pip install 'trafficmorph==0.3.3'
 ```
 
 ## Prerequisites
