@@ -1,5 +1,5 @@
 
-# === TM-WRAPPER-BLOCK-v1 === (managed by Makefile regen-client; do not hand-edit)
+# === TM-WRAPPER-BLOCK-v1 === (auto-managed; do not hand-edit)
 from . import api, errors, models, types  # noqa: F401
 from .sdk import (  # noqa: E402, F401
     Client,

@@ -1,9 +1,10 @@
-"""Hand-written ergonomic wrapper for the TrafficMorph Python SDK.
+"""TrafficMorph Python SDK — ergonomic public surface.
 
-This file is **NOT** touched by ``make regen-client``. The generator
-overwrites everything else under ``trafficmorph/`` (client.py,
-errors.py, types.py, api/, models/) — keeping the wrapper here
-keeps it regen-safe.
+This module defines :class:`Client`, the public entry point. The
+sibling modules under ``trafficmorph/`` (client.py, errors.py,
+types.py, api/, models/) hold the typed request / response classes
+and endpoint functions :class:`Client` exposes via the ``.api``
+attribute.
 
 The public surface is re-exported through ``trafficmorph.__init__``
 so callers do::
@@ -11,7 +12,7 @@ so callers do::
     from trafficmorph import Client
     from trafficmorph.api.profiles import list_profiles
 
-without having to know about the wrapper-vs-generated split.
+without needing to import this module directly.
 """
 
 from __future__ import annotations
