@@ -18,7 +18,6 @@
 [![PyPI](https://img.shields.io/pypi/v/trafficmorph)](https://pypi.org/project/trafficmorph/)
 [![Python versions](https://img.shields.io/pypi/pyversions/trafficmorph)](https://pypi.org/project/trafficmorph/)
 [![License](https://img.shields.io/pypi/l/trafficmorph)](LICENSE)
-[![Downloads](https://img.shields.io/pypi/dm/trafficmorph)](https://pypi.org/project/trafficmorph/)
 
 Typed Python client for the TrafficMorph `/api/v1` API. Request
 and response shapes are typed `attrs` classes; endpoint methods
@@ -31,7 +30,7 @@ expose both sync and async call styles.
 pip install trafficmorph
 
 # Reproducible builds (CI / production) — pin to an exact version.
-pip install 'trafficmorph==0.3.1'
+pip install 'trafficmorph==0.3.2'
 ```
 
 ## Prerequisites
