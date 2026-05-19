@@ -12,7 +12,6 @@ from . import api, errors, models, types  # noqa: F401
 from .sdk import (  # noqa: E402, F401
     Client,
     SPEC_VERSION,
-    DEFAULT_BASE_URL,
     DEFAULT_USER_AGENT,
     DEFAULT_TIMEOUT,
     EnvBaseURL,
@@ -23,7 +22,6 @@ __all__ = (
     "Client",
     "AuthenticatedClient",
     "SPEC_VERSION",
-    "DEFAULT_BASE_URL",
     "DEFAULT_USER_AGENT",
     "DEFAULT_TIMEOUT",
     "EnvBaseURL",
